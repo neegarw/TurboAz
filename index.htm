@@ -96,7 +96,7 @@
             const cards = document.getElementById('cards')
             const printCards = () => {
                 cards.innerHTML = ''
-                data.map(item => cards.innerHTML += `<div class="w-[20%] rounded-md shadow-md dark:bg-gray-50 dark:text-gray-800">
+                data.map(item => cards.innerHTML += `<div class="container max-w-xs p-5 rounded-md shadow-md dark:bg-gray-50 dark:text-gray-800">
                                                         <img onclick="showDet(${item.id})" src="${item.img}" alt="" class="object-cover object-center w-full rounded-t-md h-72 dark:bg-gray-500">
                                                         <div class="flex flex-col justify-between p-6 space-y-8">
                                                             <div class="space-y-2">
@@ -139,7 +139,7 @@
                 cards.innerHTML = ''
                 data
                 .filter(item => item.marka.toLowerCase().includes(search.value.toLowerCase()))
-                .map((item, index) => cards.innerHTML +=  `<div class="w-[20%] rounded-md shadow-md dark:bg-gray-50 dark:text-gray-800">
+                .map((item, index) => cards.innerHTML +=  `<div class="max-w-[20%] rounded-md shadow-md dark:bg-gray-50 dark:text-gray-800">
                                                             <img onclick="showDet(${item.id})" src="${item.img}" alt="" class="object-cover object-center w-full rounded-t-md h-72 dark:bg-gray-500">
                                                             <div class="flex flex-col justify-between p-6 space-y-8">
                                                                 <div class="space-y-2">
@@ -168,7 +168,7 @@
                     data
                     .filter(item => item.marka === selectedMarka)
                     .forEach(item => {
-                     cards.innerHTML += `<div class="w-[20%] rounded-md shadow-md dark:bg-gray-50 dark:text-gray-800">
+                     cards.innerHTML += `<div class="max-w-[20%] w-[100%] rounded-md shadow-md dark:bg-gray-50 dark:text-gray-800">
                                             <img onclick="showDet(${item.id})" src="${item.img}" alt="" class="object-cover object-center w-full rounded-t-md h-72 dark:bg-gray-500">
                                             <div class="flex flex-col justify-between p-6 space-y-8">
                                                 <div class="space-y-2">
