@@ -9,7 +9,7 @@
         <link rel="shortcut icon" href="favicon.ico" type="image/x-icon">
     </head>
     <body>
-        <div id="header1" class=" flex py-[10px] justify-between container mx-auto">
+        <div id="header1" class=" flex p-[10px] justify-between mx-auto container">
             <div>
                 <ul class=" flex text-gray-500 gap-3">
                     <li><a href="">Tap.az</a></li>
@@ -18,7 +18,7 @@
                 </ul>
             </div>
             <div>
-                <ul class=" flex text-gray-500 gap-3">
+                <ul class=" text-gray-500 gap-3 hidden md:flex">
                     <li><a href="">Dəstək: (012) 505-77-55</a></li>
                     <li><a href="">Yardım</a></li>
                     <li><a href="">RU</a></li>
@@ -28,7 +28,7 @@
             </div>
         </div>
         <header class="p-4 dark:bg-[#CB0E16] dark:text-white">
-            <div class="container flex justify-between h-10 mx-auto">
+            <div class="container mx-auto flex justify-between items-center">
                 <a rel="noopener noreferrer" href="#" aria-label="Back to homepage" class="flex items-center p-2 text-[1.3rem]">
                     TURBO.AZ
                 </a>
@@ -46,8 +46,10 @@
                         <a rel="noopener noreferrer" href="#" class="flex items-center px-4 -mb-1 ">Ehtiyat hissələr və salonlar</a>
                     </li>
                 </ul>
-                <div class="flex items-center md:space-x-4">
-                    <select class="text-red-900 px-2 py-2 rounded-[5px]" id="sec"></select>
+                <div class="hidden lg:flex flex-row items-center md:space-x-4 gap-[10px] ">
+                    <select onchange="filterCards()" class="text-red-900 px-2 py-2 rounded-[5px]" id="sec">
+                        <option class="hidden" selected disabled value="">Model seç</option>
+                    </select>
                     <div class="relative">
                         <input type="search" oninput="axtar()" name="Search" id="search" placeholder="Axtarış" class="w-32 py-2 pl-10 text-sm rounded-md sm:w-auto focus:outline-none dark:bg-gray-100 dark:text-gray-800 focus:dark:bg-gray-50">
                         <span class="absolute inset-y-0 left-0 flex items-center pl-2">
@@ -59,133 +61,66 @@
                         </span>
                     </div>
                     <button type="button" class="hidden px-6 py-2 font-semibold rounded lg:block dark:bg-[#7CD823] dark:text-gray-50">+Yeni elan</button>
-                    <button type="button" onclick="handleBasket(true)" class="px-8 py-3 font-semibold rounded-full dark:bg-transparent dark:text-gray-100 text-[1.3rem]"><i class="fa-solid fa-basket-shopping"></i></button>
+                    <button type="button" onclick="handleBasket(true)" class="px-8 py-3 font-semibold rounded-full dark:bg-transparent dark:text-gray-100 text-[1.3rem]"><i class="fa-solid fa-basket-shopping"></i></button> 
                 </div>
-                <button title="Open menu" type="button" class="p-4 lg:hidden">
-                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" class="w-6 h-6 dark:text-gray-800">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path>
+                <button id="menu-btn" class="md:flex lg:hidden text-white focus:outline-none">
+                    <svg class="w-6 h-6" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" d="M4 6h16M4 12h16m-7 6h7" />
                     </svg>
                 </button>
+            </div>
+            <div id="mobile-menu" class="hidden md:hidden dark:bg-[#CB0E16] p-4">
+                <a href="#" class="block py-2 text-white hover:text-gray-300">Bütün elanlar</a>
+                <a href="#" class="block py-2 text-white hover:text-gray-300">Avtosalonlar</a>
+                <a href="#" class="block py-2 text-white hover:text-gray-300">Moto</a>
+                <a href="#" class="block py-2 text-white hover:text-gray-300">Ehtiyat hissələr və salonlar</a>
+                <div class="flex flex-col justify-start items-start md:space-x-4 gap-[10px] ">
+                    <select onchange="filterCards()" class="text-red-900 px-2 py-2 rounded-[5px]" id="sec2">
+                        <option class="hidden" selected disabled value="">Model seç</option>
+                    </select>
+                    <div class="relative">
+                        <input type="search" oninput="axtar()" name="Search" id="search2" placeholder="Axtarış" class="w-32 py-2 pl-10 text-sm rounded-md sm:w-auto focus:outline-none dark:bg-gray-100 dark:text-gray-800 focus:dark:bg-gray-50">
+                        <span class="absolute inset-y-0 left-0 flex items-center pl-2">
+                            <button type="submit" title="Search" class="p-1 focus:outline-none focus:ring">
+                                <svg fill="currentColor" viewBox="0 0 512 512" class="w-4 h-4 dark:text-gray-800">
+                                    <path d="M479.6,399.716l-81.084-81.084-62.368-25.767A175.014,175.014,0,0,0,368,192c0-97.047-78.953-176-176-176S16,94.953,16,192,94.953,368,192,368a175.034,175.034,0,0,0,101.619-32.377l25.7,62.2L400.4,478.911a56,56,0,1,0,79.2-79.195ZM48,192c0-79.4,64.6-144,144-144s144,64.6,144,144S271.4,336,192,336,48,271.4,48,192ZM456.971,456.284a24.028,24.028,0,0,1-33.942,0l-76.572-76.572-23.894-57.835L380.4,345.771l76.573,76.572A24.028,24.028,0,0,1,456.971,456.284Z"></path>
+                                </svg>
+                            </button>
+                        </span>
+                    </div>
+                    <button type="button" class="hidden px-6 py-2 font-semibold rounded lg:block dark:bg-[#7CD823] dark:text-gray-50">+Yeni elan</button>
+                    <button type="button" onclick="handleBasket(true)" class="px-8 py-3 font-semibold rounded-full dark:bg-transparent dark:text-gray-100 text-[1.3rem]"><i class="fa-solid fa-basket-shopping"></i></button> 
+                </div>
             </div>
         </header>
         <main>
             <div id="cards" class="py-[40px] flex justify-center items-center gap-[20px] flex-wrap"></div>
-            <div id="sidebar" class="bg-rose-950 fixed transition-all w-[30vw] h-[100vh] top-0 right-[-30vw]">
+            <div class="flex justify-center">
+                <button id="showBtn" onclick="showMore()" type="button" class="px-6 py-3 text-sm rounded-md hover:underline dark:bg-gray-900 dark:text-gray-400">Load more posts...</button>
+            </div>
+            <div id="sidebar" class="bg-rose-950 fixed transition-all w-[100vw] md:w-[30vw] h-[100vh] top-0 md:right-[-30%] right-[100%] overflow-auto">
                 <div onclick="handleBasket(false)" class="text-[20px] text-white absolute left-[20px] top-[20px]">╳</div>
+                <div class="flex flex-col max-w-3xl p-6 space-y-4 sm:p-10 bg-rose-950 dark:text-white">
+                    <ul id="shoppingList" class="flex flex-col divide-y dark:divide-gray-300">
+                        
+                    </ul>
+                    <div class="space-y-1 text-right">
+                        <p>Ümumi: 
+                            <span id="totalSec" class="font-semibold"></span>
+                        </p>
+                    </div>
+                    <div class="flex justify-end space-x-4">
+                        <button type="button" class="px-6 py-2 border rounded-md dark:border-white">Alış-verişə
+                            <span class="sr-only sm:not-sr-only">geri dön</span>
+                        </button>
+                        <button type="button" class="px-6 py-2 border rounded-md dark:bg-white dark:text-red-950 dark:border-white">
+                            <span class="sr-only sm:not-sr-only">Səbəti </span>təsdiqlə
+                        </button>
+                    </div>
+                </div>
             </div>
         </main>
-
-        <script>
-            const data = [
-                { id: 1, marka: 'Mercedes', qiymet: '10 500', model: 'w202', mator: '2.0', il: '1998', reng: 'silver', img: 'https://turbo.azstatic.com/uploads/full/2022%2F02%2F07%2F16%2F20%2F36%2F05ae3ec7-b845-4458-8033-99eec8aec1a2%2F83217_ryHX2Q7AONB3-jC_sEJ3mQ.jpg' },
-                { id: 2, marka: 'Kia', qiymet: '21 000', model: 'Rio', mator: '1.4', il: '2014', reng: 'silver', img: 'https://turbo.azstatic.com/uploads/full/2021%2F09%2F10%2F11%2F40%2F18%2Fbe262b8b-13ff-40ee-9664-4c7c4ea93e4b%2F94552_bf7HpneCobaNn8ooAalBwg.jpg' },
-                { id: 3, marka: 'Hyundai', qiymet: '12 000', model: 'Tucson', mator: '2.0', il: '2014', reng: 'black', img: 'https://turbo.azstatic.com/uploads/f660x496/2020%2F02%2F08%2F12%2F31%2F23%2Fdfd4bcdd-5279-4807-85cb-58aa153c900f%2F44290_Il5UqH7nhzVTrAAfdt5BuQ.jpg' },
-                { id: 4, marka: 'LADA (VAZ)', qiymet: '35 000', model: '2107', mator: '1.6', il: '2010', reng: 'black', img: 'https://turbo.azstatic.com/uploads/full/2022%2F09%2F29%2F04%2F48%2F26%2Ff85c3fb0-4f77-4157-8b15-a3122bbaf36d%2F15612_S_xRbeuG6jQhZhkc_JM3wg.jpg' },
-                { id: 5, marka: 'BMW', qiymet: '28 700', model: 'M5 e39', mator: '4.4', il: '1998', reng: 'blue', img: 'https://turbo.azstatic.com/uploads/full/2020%2F08%2F15%2F17%2F42%2F55%2F5e61d0d8-ac41-42d4-8a34-33f9c563bba8%2F4747_ZOpsrcdSRl_mByG6tDsiqQ.jpg' },
-                { id: 6, marka: 'Mercedes', qiymet: '86 500', model: 'CLS', mator: '5.5', il: '2013', reng: 'gray', img: 'https://turbo.azstatic.com/uploads/full/2021%2F12%2F09%2F01%2F51%2F22%2F2e3d6e19-baa7-4625-89e0-d358238808ce%2F21872_z_Z4BhoRifgwGf0Fz_hvJw.jpg' },
-                { id: 7, marka: 'Toyota', qiymet: '54 000', model: 'Camry', mator: '3.0', il: '2021', reng: 'white', img: 'https://turbo.azstatic.com/uploads/full/2021%2F06%2F18%2F16%2F16%2F02%2Fd4a556f8-adc6-4ff8-897b-2079ea777987%2F24971_KEan9mcELSSmUAPbxG1KEw.jpg' },
-                { id: 8, marka: 'Porche', qiymet: '118 400', model: '911 Carrera', mator: '4.4', il: '2023', reng: 'cyan', img: 'https://turbo.azstatic.com/uploads/full/2020%2F08%2F13%2F13%2F32%2F55%2F012a26df-efae-4cf0-b763-a4c3de17ae23%2F46349_cqQK5HyMFGcJOEMh1pCm1A.jpg' },
-                { id: 9, marka: 'Dodge', qiymet: '38 500', model: 'Challenger', mator: '7.2', il: '2018', reng: 'black', img: 'https://turbo.azstatic.com/uploads/full/2021%2F04%2F09%2F10%2F02%2F28%2F9a6bf393-9f08-476b-abc0-d6278f1d6668%2F37456_34ZTVBn26COoCWhsqBx3vw.jpg' },
-                { id: 10, marka: 'Nissan', qiymet: '86 000', model: 'GTR R-35', mator: '3.0', il: '2014', reng: 'black', img: 'https://turbo.azstatic.com/uploads/full/2017%2F02%2F16%2F00%2F02%2F00%2F573%2F54000_4wUHTVdrb_-kLx6BJMuF8Q.jpg' },
-                { id: 11, marka: 'Audi', qiymet: '124 100', model: 'RS7', mator: '4.0', il: '2015', reng: 'dimgrey', img: 'https://turbo.azstatic.com/uploads/full/2021%2F05%2F29%2F15%2F33%2F07%2Fc9bec2ac-97eb-4e07-bc8a-509f1898dd7d%2F82001_MmzL0_nnwbSnJI6rtabq7Q.jpg' },
-                { id: 12, marka: 'Toyota',qiymet: '15 800', model: 'Corolla', mator: '1.6', il: '2016', reng: 'white',img: 'https://turbo.azstatic.com/uploads/full/2020%2F09%2F24%2F08%2F21%2F40%2Facdc9e7e-d243-46fd-b2ce-dc51a85c8343%2F66667_OxPaAqSg8MzGM7diar5WlQ.jpg'},
-                { id: 13, marka: 'Honda', qiymet: '18 500', model: 'Civic', mator: '1.8', il: '2017', reng: 'cyan', img: 'https://turbo.azstatic.com/uploads/full/2023%2F03%2F29%2F18%2F06%2F09%2F1dc0eed8-15d4-46f9-abf5-0b772be61d2d%2F98117_r2JD4f3tCYHUBNquO-VTdQ.jpg'},
-                { id: 14, marka: 'Volkswagen', qiymet: '23 200', model: 'Golf', mator: '2.0', il: '2019', reng: 'white', img: 'https://turbo.azstatic.com/uploads/full/2023%2F02%2F17%2F15%2F03%2F28%2F97566bce-3bcb-43ff-8c96-5274fdf59360%2F74622_ZZd9ojx9ZyTk5EOyx7D3wA.jpg'}
-            ]
-
-            const cards = document.getElementById('cards')
-            const printCards = () => {
-                cards.innerHTML = ''
-                data.map(item => cards.innerHTML += `<div class="container max-w-xs p-5 rounded-md shadow-md dark:bg-gray-50 dark:text-gray-800">
-                                                        <img onclick="showDet(${item.id})" src="${item.img}" alt="" class="object-cover object-center w-full rounded-t-md h-72 dark:bg-gray-500">
-                                                        <div class="flex flex-col justify-between p-6 space-y-8">
-                                                            <div class="space-y-2">
-                                                                <h2 class="text-3xl font-semibold tracking-wide hover:text-red-900 transition">${item.qiymet}₼</h2>
-                                                                <h2 class="text-xl font-semibold tracking-wide">${item.marka},${item.model}</h2>
-                                                                <p class="dark:text-gray-800">${item.il}, ${item.mator}, <span id="color">${item.reng}</span></p>
-                                                            </div>
-                                                        </div>
-                                                    </div>`)
-            }
-            printCards()
-            function showDet(id){
-                const obj = data.find(item => item.id == id)
-                cards.innerHTML = ''
-                cards.innerHTML += `<div class="flex flex-col items-start justify-center container mx-auto w-[80%]">
-                                        <h1 class="text-[2rem] py-[10px]"><span class="text-red-700">❮❮ </span>${obj.marka} ${obj.model}, ${obj.il}, ${obj.mator}, ${obj.il}</h1>
-                                        <a rel="noopener noreferrer" href="#" class="block gap-3 mx-auto sm:max-w-full group hover:no-underline focus:no-underline lg:grid lg:grid-cols-12 dark:bg-gray-50">
-                                            <img src="${obj.img}" alt="" class="object-cover w-full h-64 rounded sm:h-96 lg:col-span-7 dark:bg-gray-500">
-                                            <div class="p-6 space-y-2 lg:col-span-5">
-                                                <h2 class="text-3xl font-semibold tracking-wide hover:text-red-900 transition">${obj.qiymet}₼</h2>
-                                                <div class="flex h-[70px] align-middle gap-[15px]">
-                                                    <div class="w-[15%]">
-                                                        <img class="h-[100%] w-full object-cover" src="${obj.img}" alt="">
-                                                    </div>
-                                                    <div>
-                                                        <h4>Autolux Azerbaijan - ${obj.marka}</h4>
-                                                        <h4>Resmi nümayende</h4>
-                                                    </div>
-                                                </div>
-                                                <button type="button" class="px-8 py-3 w-[100%] font-semibold rounded-full dark:bg-green-600 dark:text-gray-100">📞  Zeng et</button>
-                                                <h2 class="text-xl font-semibold tracking-wide hover:text-red-900 transition">There's Only One.</h2>
-                                                <p>${obj.marka} avtomobillerinin Azerbaycanda resmil distribütoru Avtolüks Azerbaycan MMC-dir. 20% ilkin ödanis, 10% illik bank faizi, 5 illik<p>
-                                                <button type="button" class="px-8 py-3 w-[100%] font-semibold rounded-full dark:bg-blue-500 dark:text-gray-100">Salona keç</button>
-                                            </div>
-                                        </a>
-                                    </div>`
-             }
-            const search = document.getElementById('search')
-            function axtar(){
-                cards.innerHTML = ''
-                data
-                .filter(item => item.marka.toLowerCase().includes(search.value.toLowerCase()))
-                .map((item, index) => cards.innerHTML +=  `<div class="max-w-[20%] rounded-md shadow-md dark:bg-gray-50 dark:text-gray-800">
-                                                            <img onclick="showDet(${item.id})" src="${item.img}" alt="" class="object-cover object-center w-full rounded-t-md h-72 dark:bg-gray-500">
-                                                            <div class="flex flex-col justify-between p-6 space-y-8">
-                                                                <div class="space-y-2">
-                                                                    <h2 class="text-3xl font-semibold tracking-wide hover:text-red-900 transition">${item.qiymet}₼</h2>
-                                                                    <h2 class="text-xl font-semibold tracking-wide">${item.marka},${item.model}</h2>
-                                                                    <p class="dark:text-gray-800">${item.il}, ${item.mator}, ${item.reng}</p>
-                                                                </div>
-                                                            </div>
-                                                        </div>`)
-            }
-            
-            function createOp(){
-                const sec = document.getElementById('sec');
-                sec.innerHTML = ''
-                sec.innerHTML +=`<option>Marka Sec</option>`
-                data.filter(item => item.marka)
-                .map(item => sec.innerHTML +=`<option>${item.marka}</option>`)
-            }
-            createOp();
-
-            sec.onchange = filterCards
-            function filterCards(){
-                const sec = document.getElementById('sec');
-                cards.innerHTML = '';
-                let selectedMarka = document.getElementById('sec').value;
-                    data
-                    .filter(item => item.marka === selectedMarka)
-                    .forEach(item => {
-                     cards.innerHTML += `<div class="max-w-[20%] w-[100%] rounded-md shadow-md dark:bg-gray-50 dark:text-gray-800">
-                                            <img onclick="showDet(${item.id})" src="${item.img}" alt="" class="object-cover object-center w-full rounded-t-md h-72 dark:bg-gray-500">
-                                            <div class="flex flex-col justify-between p-6 space-y-8">
-                                                <div class="space-y-2">
-                                                    <h2 class="text-3xl font-semibold tracking-wide hover:text-red-900 transition">${item.qiymet}₼</h2>
-                                                    <h2 class="text-xl font-semibold tracking-wide">${item.marka},${item.model}</h2>
-                                                    <p class="dark:text-gray-800">${item.il}, ${item.mator}, ${item.reng}</p>
-                                                </div>
-                                            </div>
-                                        </div>`})
-                                        
-            }
-
-            const sidebar = document.getElementById('sidebar')
-            function handleBasket(status) {
-                sidebar.style.right = status ? '0' : '-30vw'
-            }
-
-        </script>
+        <script src="data.js"></script>
+        <script src="script.js"></script>
     </body>
 </html>

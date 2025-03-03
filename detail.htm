@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Document</title>
+        <link rel="stylesheet" href="output.css">
+    </head>
+    <body>
+        <main class="">
+            <div id="cardDet" class=" flex justify-center items-center h-[100vh]"></div>
+        </main>
+        <script src="data.js"></script>
+        <script>
+            const cardDet = document.getElementById('cardDet')
+            const url = window.location.search
+            const params = new URLSearchParams(url)
+            const id = params.get('id')
+            const obj = data.find(item => item.id == id)
+
+            cardDet.innerHTML += `<div class="flex flex-col items-start justify-center container h-[50%] m-auto w-[80%]">
+                                    <h1 class="text-[2rem] py-[10px]"><span class="text-red-700">❮❮ </span>${obj.marka} ${obj.model}, ${obj.il}, ${obj.mator}, ${obj.il}</h1>
+                                    <a rel="noopener noreferrer" href="#" class="block gap-3 mx-auto sm:max-w-full group hover:no-underline focus:no-underline lg:grid lg:grid-cols-12 dark:bg-gray-50">
+                                        <img src="${obj.img}" alt="" class="object-cover w-full h-64 rounded sm:h-96 lg:col-span-7 dark:bg-gray-500">
+                                        <div class="p-6 space-y-2 lg:col-span-5">
+                                            <h2 class="text-3xl font-semibold tracking-wide hover:text-red-900 transition">${obj.qiymet}₼</h2>
+                                            <div class="flex h-[70px] align-middle gap-[15px]">
+                                                <div class="w-[15%]">
+                                                    <img class="h-[100%] w-full object-cover" src="${obj.img}" alt="">
+                                                </div>
+                                                <div>
+                                                    <h4>Autolux Azerbaijan - ${obj.marka}</h4>
+                                                    <h4>Resmi nümayende</h4>
+                                                </div>
+                                            </div>
+                                            <button type="button" class="px-8 py-3 w-[100%] font-semibold rounded-full dark:bg-green-600 dark:text-gray-100">📞  Zeng et</button>
+                                            <h2 class="text-xl font-semibold tracking-wide hover:text-red-900 transition">There's Only One.</h2>
+                                            <p>${obj.marka} avtomobillerinin Azerbaycanda resmil distribütoru Avtolüks Azerbaycan MMC-dir. 20% ilkin ödanis, 10% illik bank faizi, 5 illik<p>
+                                            <button type="button" class="px-8 py-3 w-[100%] font-semibold rounded-full dark:bg-blue-500 dark:text-gray-100">Salona keç</button>
+                                        </div>
+                                    </a>
+                                </div>`
+        </script>
+    </body>
+</html>
