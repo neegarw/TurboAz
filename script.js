@@ -7,6 +7,8 @@ const shoppingList = document.getElementById('shoppingList')
 const search = document.getElementById('search')
 const search2 = document.getElementById('search2')
 const sidebar = document.getElementById('sidebar')
+const totalEndrim = document.getElementById('totalEndrim')
+const totalEndrimsiz = document.getElementById('totalEndrimsiz')
 
 
 let cardsNum = 4
@@ -40,7 +42,7 @@ function handleBasket(status) {
     sidebar.style.right = status ? '0' : '-100vw'
 }
 
-const basketArr = []
+let basketArr = []
 function buy(id) {
     const obj = data.find(item => item.id == id)
     const product = basketArr.find(item => item.id == id)   
@@ -109,13 +111,18 @@ function filterCards(){
                             </div>
                         </div>`})
     showBtn.style.display = 'none'
-
 }
 
 function printBasket(){
     const total = basketArr.reduce((acc, item) => {return acc + item.qiymet * item.count}, 0) 
-    const umumi = basketArr.some(item => item.count >= 10) ? total * 0.9 : total;
-    totalSec.innerHTML = umumi + '₼'
+    const totalCount = basketArr.reduce((acc, item) => acc + item.count, 0);
+    const hasDiscount = totalCount >= 10
+    const umumi = hasDiscount ? total * 0.9 : total
+    const endrim = hasDiscount ? total * 0.1 : 0;
+
+    totalEndrimsiz.innerHTML = 'Endrimsiz qiymet: ' + total + '₼'
+    totalSec.innerHTML = hasDiscount ? 'Endrimli qiymet: ' + umumi + '₼' : ''
+    totalEndrim.innerHTML = hasDiscount ? `<p>Ümumi endirim: <span class="font-semibold">${endrim}</span></p>` : '';
     shoppingList.innerHTML = ''
     basketArr.map(item => shoppingList.innerHTML += `<li class="flex flex-col py-6 sm:flex-row sm:justify-between">
                                                             <div class="flex w-full space-x-2 sm:space-x-4">
@@ -133,8 +140,8 @@ function printBasket(){
                                                                         </div>
                                                                         <div class="text-right">
                                                                             <p class="text-lg font-semibold">${item.qiymet}₼</p>
-                                                                            <span>total:</span><span class="text-md dark:text-white ${item.count >= 10 ? 'line-through' : ''}">${item.qiymet * item.count}₼</span>
-                                                                            <p class=" dark:text-gray-600">${item.count >= 10 ? 'Endirimli qiymet: ' + item.count * item.qiymet * 0.9 : ''}</p>
+                                                                            <span>total:</span><span class="text-md dark:text-white ${totalCount >= 10 ? 'line-through' : ''}">${item.qiymet * item.count}₼</span>
+                                                                            <p class=" dark:text-gray-600">${totalCount >= 10 ? 'Endirimli qiymet: ' + item.count * item.qiymet * 0.9 : ''}</p>
                                                                         </div>
                                                                     </div>
                                                                     <div class="flex text-sm divide-x">
@@ -158,7 +165,6 @@ function printBasket(){
                                                                 </div>
                                                             </div>
                                                         </li>`)
-
 }
 const opts = []
 function printModels() {
@@ -168,6 +174,11 @@ function printModels() {
     opts.forEach(item => sec.innerHTML += `<option value="${item}">${item}</option>`)
 }
 printModels()
+
+function deleteBasket(){
+    basketArr = []
+    printBasket()
+}
 
 // burgerMenyu
 document.addEventListener("DOMContentLoaded", function () {
